@@ -1,8 +1,9 @@
 use clap::Parser;
 use color_eyre::eyre::{Ok, Result};
 
-use crate::cli::{repos::ReposCommands, tools::ToolsCommands};
+use crate::cli::{cli_config::CliConfig, repos::ReposCommands, tools::ToolsCommands};
 
+mod cli_config;
 mod repos;
 mod status;
 mod tools;
@@ -29,10 +30,15 @@ enum Commands {
 
 pub fn cli_main() -> Result<()> {
     let cli = Cli::parse();
+    let cli_cfg = CliConfig::load()?;
     match cli.commands {
-        Commands::Status => {}
-        Commands::Repos { repos_cmd: _ } => {}
-        Commands::Tools { tools_cmd: _ } => {}
+        Commands::Status => {
+            status::handle_cmd(&cli_cfg)?;
+        }
+        Commands::Repos { repos_cmd } => repos::handle_cmd(&cli_cfg, repos_cmd)?,
+        Commands::Tools { tools_cmd } => {
+            tools::handle_cmd(&cli_cfg, tools_cmd)?;
+        }
     }
     Ok(())
 }

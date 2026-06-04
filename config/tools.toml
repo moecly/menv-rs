@@ -1,0 +1,1026 @@
+[categories]
+base = "基础工具"
+shell = "Shell/终端"
+file = "文件管理"
+tui = "TUI 客户端"
+pkg = "包管理器/语言运行时"
+wayland = "Wayland/桌面"
+input = "输入法/字体"
+cli = "CLI 增强工具"
+net = "网络/安全"
+system = "系统管理"
+productivity = "生产力/娱乐"
+other = "其他"
+
+# ============================================================
+# Tools
+# ============================================================
+# fields: package_source, category, package_name, commands, desc
+#   package_source: pacman / aur
+#   category:      base / shell / file / tui / pkg / wayland / input / cli / net / system / productivity / other
+#   package_name:  actual pacman/AUR package name
+#   commands:      space-separated commands for detection
+#   desc:          description
+
+# ============================================================
+# Tools
+# ============================================================
+[[tools]]
+tool_name = "git"
+package_name = "git"
+package_source = "pacman"
+category = "base"
+desc = "版本控制"
+command = "git"
+
+[[tools]]
+tool_name = "fd"
+package_name = "fd"
+package_source = "pacman"
+category = "base"
+desc = "快速文件搜索"
+command = "fd"
+
+[[tools]]
+tool_name = "ripgrep"
+package_name = "ripgrep"
+package_source = "pacman"
+category = "base"
+desc = "快速代码搜索"
+command = "rg"
+
+[[tools]]
+tool_name = "fzf"
+package_name = "fzf"
+package_source = "pacman"
+category = "base"
+desc = "模糊查找工具"
+command = "fzf"
+
+[[tools]]
+tool_name = "zsh"
+package_name = "zsh"
+package_source = "pacman"
+category = "shell"
+desc = "Shell"
+command = "zsh"
+
+[[tools]]
+tool_name = "tmux"
+package_name = "tmux"
+package_source = "pacman"
+category = "shell"
+desc = "终端复用器"
+command = "tmux"
+
+[[tools]]
+tool_name = "nvim"
+package_name = "nvim"
+package_source = "pacman"
+category = "shell"
+desc = "文本编辑器"
+command = "nvim"
+
+[[tools]]
+tool_name = "direnv"
+package_name = "direnv"
+package_source = "pacman"
+category = "shell"
+desc = "目录级环境变量管理"
+command = "direnv"
+
+[[tools]]
+tool_name = "eza"
+package_name = "eza"
+package_source = "pacman"
+category = "file"
+desc = "现代的 ls 替代品"
+command = "eza"
+
+[[tools]]
+tool_name = "trash-cli"
+package_name = "trash-cli"
+package_source = "pacman"
+category = "file"
+desc = "回收站工具"
+command = "trash"
+
+[[tools]]
+tool_name = "zoxide"
+package_name = "zoxide"
+package_source = "pacman"
+category = "file"
+desc = "快速目录导航"
+command = "zoxide"
+
+[[tools]]
+tool_name = "lazygit"
+package_name = "lazygit"
+package_source = "pacman"
+category = "tui"
+desc = "TUI Git 客户端"
+command = "lazygit"
+
+[[tools]]
+tool_name = "systemctl-tui"
+package_name = "systemctl-tui"
+package_source = "aur"
+category = "tui"
+desc = "systemd 服务管理 TUI"
+command = "systemctl-tui"
+
+[[tools]]
+tool_name = "yazi"
+package_name = "yazi"
+package_source = "pacman"
+category = "tui"
+desc = "终端文件管理器 (Rust)"
+command = "yazi"
+
+[[tools]]
+tool_name = "lazydocker"
+package_name = "lazydocker"
+package_source = "aur"
+category = "tui"
+desc = "容器管理 TUI"
+command = "lazydocker"
+
+[[tools]]
+tool_name = "npm"
+package_name = "npm"
+package_source = "pacman"
+category = "pkg"
+desc = "Node.js 包管理器"
+command = "npm"
+
+[[tools]]
+tool_name = "nodejs"
+package_name = "nodejs"
+package_source = "pacman"
+category = "pkg"
+desc = "JavaScript 运行时"
+command = "nodejs"
+
+[[tools]]
+tool_name = "python"
+package_name = "python"
+package_source = "pacman"
+category = "pkg"
+desc = "Python 解释器"
+command = "python3"
+
+[[tools]]
+tool_name = "pip"
+package_name = "python-pip"
+package_source = "pacman"
+category = "pkg"
+desc = "Python 包管理器"
+command = "pip3"
+
+[[tools]]
+tool_name = "pipx"
+package_name = "python-pipx"
+package_source = "pacman"
+category = "pkg"
+desc = "Python 应用隔离安装"
+command = "pipx"
+
+[[tools]]
+tool_name = "gcc"
+package_name = "gcc"
+package_source = "pacman"
+category = "pkg"
+desc = "C/C++ 编译器"
+command = "gcc"
+
+[[tools]]
+tool_name = "paru"
+package_name = "paru"
+package_source = "aur"
+category = "pkg"
+desc = "AUR 包管理器"
+command = "paru"
+
+[[tools]]
+tool_name = "crun"
+package_name = "crun"
+package_source = "pacman"
+category = "pkg"
+desc = "OCI 容器运行时"
+command = "crun"
+
+[[tools]]
+tool_name = "podman"
+package_name = "podman"
+package_source = "pacman"
+category = "pkg"
+desc = "容器管理工具"
+command = "podman"
+
+[[tools]]
+tool_name = "podman-compose"
+package_name = "podman-compose"
+package_source = "pacman"
+category = "pkg"
+desc = "Podman Compose 编排工具"
+command = "podman-compose"
+
+[[tools]]
+tool_name = "podman-docker"
+package_name = "podman-docker"
+package_source = "pacman"
+category = "pkg"
+desc = "Podman Docker 兼容层"
+command = ""
+
+[[tools]]
+tool_name = "distrobox"
+package_name = "distrobox"
+package_source = "pacman"
+category = "pkg"
+desc = "容器化 Linux 发行版管理工具"
+command = "distrobox"
+
+[[tools]]
+tool_name = "niri"
+package_name = "niri"
+package_source = "pacman"
+category = "wayland"
+desc = "Wayland 合成器"
+command = "niri"
+
+[[tools]]
+tool_name = "fuzzel"
+package_name = "fuzzel"
+package_source = "pacman"
+category = "wayland"
+desc = "Wayland 应用启动器"
+command = "fuzzel"
+
+[[tools]]
+tool_name = "kitty"
+package_name = "kitty"
+package_source = "pacman"
+category = "wayland"
+desc = "GPU 加速终端"
+command = "kitty"
+
+[[tools]]
+tool_name = "xwayland-satellite"
+package_name = "xwayland-satellite"
+package_source = "pacman"
+category = "wayland"
+desc = "XWayland 兼容层"
+command = "xwayland-satellite"
+
+[[tools]]
+tool_name = "wlogout"
+package_name = "wlogout"
+package_source = "aur"
+category = "wayland"
+desc = "Wayland 锁屏工具"
+command = "wlogout"
+
+[[tools]]
+tool_name = "dms"
+package_name = "dms-shell-niri"
+package_source = "pacman"
+category = "wayland"
+desc = "动态菜单"
+command = "dms"
+
+[[tools]]
+tool_name = "archlinux-wallpaper"
+package_name = "archlinux-wallpaper"
+package_source = "pacman"
+category = "wayland"
+desc = "Arch Linux 壁纸"
+command = ""
+
+[[tools]]
+tool_name = "grim"
+package_name = "grim"
+package_source = "pacman"
+category = "wayland"
+desc = "Wayland 截图工具"
+command = "grim"
+
+[[tools]]
+tool_name = "slurp"
+package_name = "slurp"
+package_source = "pacman"
+category = "wayland"
+desc = "Wayland 区域选择工具"
+command = "slurp"
+
+[[tools]]
+tool_name = "satty"
+package_name = "satty"
+package_source = "pacman"
+category = "wayland"
+desc = "截图标注工具"
+command = "satty"
+
+[[tools]]
+tool_name = "wl-clipboard"
+package_name = "wl-clipboard"
+package_source = "pacman"
+category = "wayland"
+desc = "Wayland 剪贴板工具"
+command = "wl-copy"
+
+[[tools]]
+tool_name = "cliphist"
+package_name = "cliphist"
+package_source = "pacman"
+category = "wayland"
+desc = "Wayland 剪贴板历史管理工具"
+command = "cliphist"
+
+[[tools]]
+tool_name = "fcitx5"
+package_name = "fcitx5"
+package_source = "pacman"
+category = "input"
+desc = "输入法框架"
+command = "fcitx5"
+
+[[tools]]
+tool_name = "fcitx5-qt"
+package_name = "fcitx5-qt"
+package_source = "pacman"
+category = "input"
+desc = "输入法框架 Qt 插件"
+command = ""
+
+[[tools]]
+tool_name = "fcitx5-gtk"
+package_name = "fcitx5-gtk"
+package_source = "pacman"
+category = "input"
+desc = "输入法框架 GTK 插件"
+command = ""
+
+[[tools]]
+tool_name = "fcitx5-configtool"
+package_name = "fcitx5-configtool"
+package_source = "pacman"
+category = "input"
+desc = "输入法框架配置工具"
+command = "fcitx5-configtool"
+
+[[tools]]
+tool_name = "fcitx5-chinese-addons"
+package_name = "fcitx5-chinese-addons"
+package_source = "pacman"
+category = "input"
+desc = "输入法框架中文插件"
+command = ""
+
+[[tools]]
+tool_name = "noto-fonts-cjk"
+package_name = "noto-fonts-cjk"
+package_source = "pacman"
+category = "input"
+desc = "Google Noto CJK 字体"
+command = ""
+
+[[tools]]
+tool_name = "ttf-0xproto-nerd"
+package_name = "ttf-0xproto-nerd"
+package_source = "pacman"
+category = "input"
+desc = "等宽字体"
+command = ""
+
+[[tools]]
+tool_name = "noto-fonts-emoji"
+package_name = "noto-fonts-emoji"
+package_source = "pacman"
+category = "input"
+desc = "Google Noto Emoji 字体"
+command = ""
+
+[[tools]]
+tool_name = "delta"
+package_name = "git-delta"
+package_source = "pacman"
+category = "cli"
+desc = "Git 差异查看工具"
+command = "delta"
+
+[[tools]]
+tool_name = "procs"
+package_name = "procs"
+package_source = "pacman"
+category = "cli"
+desc = "进程查看工具"
+command = "procs"
+
+[[tools]]
+tool_name = "xh"
+package_name = "xh"
+package_source = "pacman"
+category = "cli"
+desc = "现代的 HTTP 客户端"
+command = "xh"
+
+[[tools]]
+tool_name = "gping"
+package_name = "gping"
+package_source = "pacman"
+category = "cli"
+desc = "Ping 工具"
+command = "gping"
+
+[[tools]]
+tool_name = "btop"
+package_name = "btop"
+package_source = "pacman"
+category = "cli"
+desc = "系统监控工具"
+command = "btop"
+
+[[tools]]
+tool_name = "dust"
+package_name = "dust"
+package_source = "pacman"
+category = "cli"
+desc = "磁盘使用情况分析工具"
+command = "dust"
+
+[[tools]]
+tool_name = "duf"
+package_name = "duf"
+package_source = "pacman"
+category = "cli"
+desc = "磁盘使用情况分析工具"
+command = "duf"
+
+[[tools]]
+tool_name = "bat"
+package_name = "bat"
+package_source = "pacman"
+category = "cli"
+desc = "语法高亮的 cat 工具"
+command = "bat"
+
+[[tools]]
+tool_name = "ouch"
+package_name = "ouch"
+package_source = "pacman"
+category = "cli"
+desc = "压缩工具"
+command = "ouch"
+
+[[tools]]
+tool_name = "tldr"
+package_name = "tldr"
+package_source = "pacman"
+category = "cli"
+desc = "简化版的 man 页面"
+command = "tldr"
+
+[[tools]]
+tool_name = "man"
+package_name = "man-db"
+package_source = "pacman"
+category = "cli"
+desc = "man 手册页查看器"
+command = "man"
+
+[[tools]]
+tool_name = "man-pages"
+package_name = "man-pages"
+package_source = "pacman"
+category = "cli"
+desc = "man 手册页内容"
+command = ""
+
+[[tools]]
+tool_name = "ncdu"
+package_name = "ncdu"
+package_source = "pacman"
+category = "cli"
+desc = "磁盘使用情况分析工具"
+command = "ncdu"
+
+[[tools]]
+tool_name = "plocate"
+package_name = "plocate"
+package_source = "pacman"
+category = "cli"
+desc = "快速文件搜索工具"
+command = "plocate"
+
+[[tools]]
+tool_name = "cava"
+package_name = "cava"
+package_source = "pacman"
+category = "cli"
+desc = "音频可视化工具"
+command = "cava"
+
+[[tools]]
+tool_name = "unzip"
+package_name = "unzip"
+package_source = "pacman"
+category = "cli"
+desc = "解压缩工具"
+command = "unzip"
+
+[[tools]]
+tool_name = "progress"
+package_name = "progress"
+package_source = "pacman"
+category = "cli"
+desc = "进程进度监控"
+command = "progress"
+
+[[tools]]
+tool_name = "pv"
+package_name = "pv"
+package_source = "pacman"
+category = "cli"
+desc = "管道进度监控"
+command = "pv"
+
+[[tools]]
+tool_name = "rsync"
+package_name = "rsync"
+package_source = "pacman"
+category = "cli"
+desc = "文件同步与传输"
+command = "rsync"
+
+[[tools]]
+tool_name = "feh"
+package_name = "feh"
+package_source = "pacman"
+category = "cli"
+desc = "轻量级图片查看器"
+command = "feh"
+
+[[tools]]
+tool_name = "fastfetch"
+package_name = "fastfetch"
+package_source = "pacman"
+category = "cli"
+desc = "系统信息显示工具"
+command = "fastfetch"
+
+[[tools]]
+tool_name = "magick"
+package_name = "imagemagick"
+package_source = "pacman"
+category = "cli"
+desc = "图像处理工具"
+command = "magick"
+
+[[tools]]
+tool_name = "jq"
+package_name = "jq"
+package_source = "pacman"
+category = "cli"
+desc = "JSON 处理工具"
+command = "jq"
+
+[[tools]]
+tool_name = "7z"
+package_name = "7zip"
+package_source = "pacman"
+category = "cli"
+desc = "压缩/解压工具"
+command = "7z"
+
+[[tools]]
+tool_name = "chafa"
+package_name = "chafa"
+package_source = "pacman"
+category = "cli"
+desc = "终端图片显示工具"
+command = "chafa"
+
+[[tools]]
+tool_name = "ssh"
+package_name = "openssh"
+package_source = "pacman"
+category = "net"
+desc = "SSH 客户端"
+command = "ssh"
+
+[[tools]]
+tool_name = "sshfs"
+package_name = "sshfs"
+package_source = "pacman"
+category = "net"
+desc = "SSH 文件系统挂载工具"
+command = "sshfs"
+
+[[tools]]
+tool_name = "chromium"
+package_name = "chromium"
+package_source = "pacman"
+category = "net"
+desc = "网页浏览器"
+command = "chromium"
+
+[[tools]]
+tool_name = "flclash"
+package_name = "flclash-bin"
+package_source = "aur"
+category = "net"
+desc = "代理客户端 (ClashMeta)"
+command = "flclash"
+
+[[tools]]
+tool_name = "localsend"
+package_name = "localsend-bin"
+package_source = "aur"
+category = "net"
+desc = "局域网文件传输"
+command = "localsend"
+
+[[tools]]
+tool_name = "mutagen"
+package_name = "mutagen.io-bin"
+package_source = "aur"
+category = "net"
+desc = "远程开发代码同步工具"
+command = "mutagen"
+
+[[tools]]
+tool_name = "ufw"
+package_name = "ufw"
+package_source = "pacman"
+category = "net"
+desc = "防火墙"
+command = "ufw"
+
+[[tools]]
+tool_name = "tailscale"
+package_name = "tailscale"
+package_source = "pacman"
+category = "net"
+desc = "VPN 内网穿透工具"
+command = "tailscale"
+
+[[tools]]
+tool_name = "tuned"
+package_name = "tuned"
+package_source = "pacman"
+category = "net"
+desc = "系统调优守护进程"
+command = "tuned"
+
+[[tools]]
+tool_name = "termshark"
+package_name = "termshark"
+package_source = "pacman"
+category = "net"
+desc = "终端版 Wireshark (tshark TUI)"
+command = "termshark"
+
+[[tools]]
+tool_name = "syncthing"
+package_name = "syncthing"
+package_source = "pacman"
+category = "net"
+desc = "文件同步工具"
+command = "syncthing"
+
+[[tools]]
+tool_name = "rclone"
+package_name = "rclone"
+package_source = "pacman"
+category = "net"
+desc = "云存储文件同步工具"
+command = "rclone"
+
+[[tools]]
+tool_name = "reflector"
+package_name = "reflector"
+package_source = "pacman"
+category = "net"
+desc = "Pacman 镜像列表更新工具"
+command = "reflector"
+
+[[tools]]
+tool_name = "linux"
+package_name = "linux"
+package_source = "pacman"
+category = "system"
+desc = "Linux 内核"
+command = ""
+
+[[tools]]
+tool_name = "linux-headers"
+package_name = "linux-headers"
+package_source = "pacman"
+category = "system"
+desc = "Linux 内核头文件"
+command = ""
+
+[[tools]]
+tool_name = "linux-lts"
+package_name = "linux-lts"
+package_source = "pacman"
+category = "system"
+desc = "Linux LTS 内核"
+command = ""
+
+[[tools]]
+tool_name = "linux-lts-headers"
+package_name = "linux-lts-headers"
+package_source = "pacman"
+category = "system"
+desc = "Linux LTS 内核头文件"
+command = ""
+
+[[tools]]
+tool_name = "linux-zen"
+package_name = "linux-zen"
+package_source = "pacman"
+category = "system"
+desc = "Linux Zen 内核"
+command = ""
+
+[[tools]]
+tool_name = "linux-zen-headers"
+package_name = "linux-zen-headers"
+package_source = "pacman"
+category = "system"
+desc = "Linux Zen 内核头文件"
+command = ""
+
+[[tools]]
+tool_name = "timeshift"
+package_name = "timeshift"
+package_source = "pacman"
+category = "system"
+desc = "系统快照工具"
+command = "timeshift"
+
+[[tools]]
+tool_name = "snapper"
+package_name = "snapper"
+package_source = "pacman"
+category = "system"
+desc = "Btrfs 快照工具"
+command = "snapper"
+
+[[tools]]
+tool_name = "snap-pac"
+package_name = "snap-pac"
+package_source = "pacman"
+category = "system"
+desc = "Pacman 钩子自动快照"
+command = ""
+
+[[tools]]
+tool_name = "btrfsmaintenance"
+package_name = "btrfsmaintenance"
+package_source = "pacman"
+category = "system"
+desc = "Btrfs 维护脚本"
+command = ""
+
+[[tools]]
+tool_name = "ntfs-3g"
+package_name = "ntfs-3g"
+package_source = "pacman"
+category = "system"
+desc = "NTFS 文件系统支持"
+command = "ntfs-3g"
+
+[[tools]]
+tool_name = "kdiskmark"
+package_name = "kdiskmark"
+package_source = "pacman"
+category = "system"
+desc = "磁盘性能测试工具"
+command = "kdiskmark"
+
+[[tools]]
+tool_name = "udiskie"
+package_name = "udiskie"
+package_source = "pacman"
+category = "system"
+desc = "可移动磁盘自动挂载工具"
+command = "udiskie"
+
+[[tools]]
+tool_name = "keyd"
+package_name = "keyd"
+package_source = "pacman"
+category = "system"
+desc = "键盘重映射工具"
+command = "keyd"
+
+[[tools]]
+tool_name = "veracrypt"
+package_name = "veracrypt"
+package_source = "pacman"
+category = "system"
+desc = "磁盘加密工具"
+command = "veracrypt"
+
+[[tools]]
+tool_name = "cryptsetup"
+package_name = "cryptsetup"
+package_source = "pacman"
+category = "system"
+desc = "LUKS 加密管理工具"
+command = "cryptsetup"
+
+[[tools]]
+tool_name = "cryptomator"
+package_name = "cryptomator-bin"
+package_source = "aur"
+category = "system"
+desc = "云文件加密工具"
+command = "cryptomator"
+
+[[tools]]
+tool_name = "polkit"
+package_name = "polkit"
+package_source = "pacman"
+category = "system"
+desc = "Polkit 权限管理工具"
+command = ""
+
+[[tools]]
+tool_name = "polkit-kde-agent"
+package_name = "polkit-kde-agent"
+package_source = "pacman"
+category = "system"
+desc = "Polkit 权限管理工具"
+command = ""
+
+[[tools]]
+tool_name = "gsmartcontrol"
+package_name = "gsmartcontrol"
+package_source = "pacman"
+category = "system"
+desc = "磁盘 SMART 健康监控"
+command = "gsmartcontrol"
+
+[[tools]]
+tool_name = "compsize"
+package_name = "compsize"
+package_source = "pacman"
+category = "system"
+desc = "Btrfs 压缩分析工具"
+command = "compsize"
+
+[[tools]]
+tool_name = "btrfs-assistant"
+package_name = "btrfs-assistant"
+package_source = "pacman"
+category = "system"
+desc = "Btrfs 子卷/快照管理工具"
+command = "btrfs-assistant"
+
+[[tools]]
+tool_name = "libreoffice"
+package_name = "libreoffice"
+package_source = "pacman"
+category = "productivity"
+desc = "办公套件"
+command = "libreoffice"
+
+[[tools]]
+tool_name = "okular"
+package_name = "okular"
+package_source = "pacman"
+category = "productivity"
+desc = "文档查看器"
+command = "okular"
+
+[[tools]]
+tool_name = "virtualbox"
+package_name = "virtualbox"
+package_source = "pacman"
+category = "productivity"
+desc = "虚拟机软件"
+command = "virtualbox"
+
+[[tools]]
+tool_name = "virtualbox-host-dkms"
+package_name = "virtualbox-host-dkms"
+package_source = "aur"
+category = "productivity"
+desc = "VirtualBox 内核模块"
+command = ""
+
+[[tools]]
+tool_name = "winboat"
+package_name = "winboat-bin"
+package_source = "aur"
+category = "productivity"
+desc = "Windows 兼容层"
+command = "winboat"
+
+[[tools]]
+tool_name = "lutris"
+package_name = "lutris"
+package_source = "pacman"
+category = "productivity"
+desc = "Linux 游戏平台"
+command = "lutris"
+
+[[tools]]
+tool_name = "motrix-next"
+package_name = "motrix-next-bin"
+package_source = "aur"
+category = "productivity"
+desc = "基于 Tauri 2 的下载管理器"
+command = "motrix-next"
+
+[[tools]]
+tool_name = "qqmusic"
+package_name = "qqmusic-bin"
+package_source = "aur"
+category = "productivity"
+desc = "QQ音乐"
+command = "qqmusic"
+
+[[tools]]
+tool_name = "wechat"
+package_name = "wechat-bin"
+package_source = "aur"
+category = "productivity"
+desc = "微信"
+command = "wechat"
+
+[[tools]]
+tool_name = "obs-studio"
+package_name = "obs-studio"
+package_source = "pacman"
+category = "productivity"
+desc = "视频录制与直播"
+command = "obs-studio"
+
+[[tools]]
+tool_name = "waydroid"
+package_name = "waydroid"
+package_source = "pacman"
+category = "productivity"
+desc = "Android 模拟器"
+command = "waydroid"
+
+[[tools]]
+tool_name = "mpv"
+package_name = "mpv"
+package_source = "pacman"
+category = "productivity"
+desc = "视频播放器"
+command = "mpv"
+
+[[tools]]
+tool_name = "ark"
+package_name = "ark"
+package_source = "pacman"
+category = "productivity"
+desc = "归档管理器"
+command = "ark"
+
+[[tools]]
+tool_name = "qalculate-qt"
+package_name = "qalculate-qt"
+package_source = "pacman"
+category = "productivity"
+desc = "强大的计算器/数学工具 (Qt 前端)"
+command = "qalculate-qt"
+
+[[tools]]
+tool_name = "keepassxc"
+package_name = "keepassxc"
+package_source = "pacman"
+category = "productivity"
+desc = "密码管理器"
+command = "keepassxc"
+
+[[tools]]
+tool_name = "opencode"
+package_name = "opencode"
+package_source = "pacman"
+category = "other"
+desc = "AI 编程助手"
+command = "opencode"
+
+[[tools]]
+tool_name = "claude-code"
+package_name = "claude-code"
+package_source = "aur"
+category = "other"
+desc = "终端 AI 编程助手"
+command = "claude-code"
+
+[[tools]]
+tool_name = "cc-switch"
+package_name = "cc-switch-bin"
+package_source = "aur"
+category = "other"
+desc = "AI CLI 多平台切换助手"
+command = "cc-switch"

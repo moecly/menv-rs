@@ -1,0 +1,47 @@
+[[repos]]
+name = "tmux"
+git_url = "git@github.com:moecly/tmux-config.git"
+
+[[repos]]
+name = "zsh"
+git_url = "git@github.com:moecly/zsh-config.git"
+
+[[repos]]
+name = "nvim"
+git_url = "git@github.com:moecly/nvim-config.git"
+
+[[repos]]
+name = "alacritty"
+git_url = "git@github.com:moecly/alacritty-config.git"
+
+[[repos]]
+name = "keyd"
+git_url = "git@github.com:moecly/keyd-config.git"
+
+[[repos]]
+name = "niri"
+git_url = "git@github.com:moecly/niri-config.git"
+
+[[repos]]
+name = "kitty"
+git_url = "git@github.com:moecly/kitty-config.git"
+
+[[repos]]
+name = "swaylock"
+git_url = "git@github.com:moecly/swaylock-config.git"
+
+[[repos]]
+name = "fuzzel"
+git_url = "git@github.com:moecly/fuzzel-config.git"
+
+[[repos]]
+name = "fontconfig"
+git_url = "git@github.com:moecly/fontconfig-config.git"
+
+[[repos]]
+name = "wlogout"
+git_url = "git@github.com:moecly/wlogout-config.git"
+
+[[repos]]
+name = "DankMaterialShell"
+git_url = "git@github.com:moecly/dms-shell-config.git"
