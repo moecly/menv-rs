@@ -1,6 +1,9 @@
-use color_eyre::eyre::{Ok, Result};
-use tracing::info;
+use color_eyre::eyre::{Context, Ok, Result};
 use tracing_subscriber::{EnvFilter, fmt};
+
+use crate::cli::cli_main;
+
+mod cli;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -10,6 +13,6 @@ async fn main() -> Result<()> {
         .with_file(true)
         .with_line_number(true)
         .init();
-    info!("helloworld");
+    cli_main().context("cli main failed")?;
     Ok(())
 }
