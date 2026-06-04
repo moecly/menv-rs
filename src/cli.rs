@@ -7,7 +7,6 @@ mod cli_config;
 mod repos;
 mod status;
 mod tools;
-mod sys;
 
 #[derive(Debug, clap::Parser)]
 #[command(name = "menv", about = "a dotfiles manager tool")]
@@ -34,11 +33,11 @@ pub fn cli_main() -> Result<()> {
     let cli_cfg = CliConfig::load()?;
     match cli.commands {
         Commands::Status => {
-            status::handle_cmd(&cli_cfg)?;
+            status::Status::handle_cmd(&cli_cfg)?;
         }
-        Commands::Repos { repos_cmd } => repos::handle_cmd(&cli_cfg, repos_cmd)?,
+        Commands::Repos { repos_cmd } => repos::Repos::handle_cmd(&cli_cfg, repos_cmd)?,
         Commands::Tools { tools_cmd } => {
-            tools::handle_cmd(&cli_cfg, tools_cmd)?;
+            tools::Tools::handle_cmd(&cli_cfg, tools_cmd)?;
         }
     }
     Ok(())

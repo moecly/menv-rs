@@ -1,13 +1,47 @@
 use color_eyre::eyre::Result;
-use tracing::info;
 
-use crate::cli::{cli_config::CliConfig, sys::Sys};
+use crate::cli::{cli_config::CliConfig, repos::Repos, tools::Tools};
 
-pub fn handle_cmd(cfg: &CliConfig) -> Result<()> {
-    let tools_cfg = cfg.get_tools_config();
-    let repos_cfg = cfg.get_repos_config();
-    tools_cfg.iter().for_each(|t| info!("{}", t.tool_name));
-    repos_cfg.iter().for_each(|r| info!("{}", r.name));
-    let _pacman_qs_info = Sys::get_pacman_qs();
-    Ok(())
+#[derive(Debug)]
+pub struct Status;
+
+impl Status {
+    pub fn handle_cmd(cfg: &CliConfig) -> Result<()> {
+        let tools_cfg = cfg.get_tools_config();
+        let repos_cfg = cfg.get_repos_config();
+        let pacman_qs_info = Tools::get_pacman_qs()?;
+        let mut tools_install = 0;
+        let tools_total = tools_cfg.len();
+        let mut repos_install = 0;
+        let repos_total = repos_cfg.len();
+
+        for t in tools_cfg {
+            if let Ok(v) = Tools::cmd_v(&t.command)
+                && v
+            {
+                tools_install += 1;
+                continue;
+            }
+
+            for info in &pacman_qs_info {
+                if info.name == t.package_name {
+                    tools_install += 1;
+                    break;
+                }
+            }
+        }
+
+        for r in repos_cfg {
+            if let Ok(v) = Repos::repo_is_exist(&r.name)
+                && v
+            {
+                repos_install += 1;
+            }
+        }
+
+        println!("✔ Repos: {}/{} cloned", repos_install, repos_total);
+        println!("✔ Tools: {}/{} cloned", tools_install, tools_total);
+
+        Ok(())
+    }
 }
