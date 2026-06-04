@@ -7,6 +7,7 @@ mod cli_config;
 mod repos;
 mod status;
 mod tools;
+mod sys;
 
 #[derive(Debug, clap::Parser)]
 #[command(name = "menv", about = "a dotfiles manager tool")]

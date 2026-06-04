@@ -39,4 +39,12 @@ impl CliConfig {
         let cli_cfg: Self = cfg.try_deserialize().context("config deserialize failed")?;
         Ok(cli_cfg)
     }
+
+    pub fn get_tools_config(&self) -> &Vec<ToolConfig> {
+        &self.tools_config
+    }
+
+    pub fn get_repos_config(&self) -> &Vec<RepoConfig> {
+        &self.repos_config
+    }
 }
