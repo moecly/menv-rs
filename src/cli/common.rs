@@ -1,5 +1,6 @@
-use std::io::Write;
+use std::{io::Write, path::PathBuf};
 
+use color_eyre::eyre::{ContextCompat, Result};
 use colored::Colorize;
 
 #[derive(Debug)]
@@ -60,5 +61,11 @@ impl Common {
         }
         println!("{}", "═".repeat(50).cyan());
         println!();
+    }
+
+    pub fn get_cfg_path() -> Result<PathBuf> {
+        Ok(dirs::home_dir()
+            .context("get home_dir failed")?
+            .join(".test_moecly_conf"))
     }
 }

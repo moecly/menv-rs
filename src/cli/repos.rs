@@ -1,6 +1,6 @@
 use std::{process::Command, sync::Arc};
 
-use color_eyre::eyre::{ContextCompat, Result, bail};
+use color_eyre::eyre::{Result, bail};
 use parking_lot::Mutex;
 use tokio::task::spawn_blocking;
 
@@ -34,9 +34,7 @@ impl Repos {
     }
 
     pub fn repo_is_exist(repo_name: &String) -> Result<bool> {
-        let repos_path = dirs::home_dir()
-            .context("get home_dir failed")?
-            .join(".test_moecly_conf");
+        let repos_path = Common::get_cfg_path()?;
         Ok(repos_path.join(repo_name).exists())
     }
 
@@ -84,11 +82,7 @@ impl Repos {
             .arg("clone")
             .arg(repo.git_url.as_str())
             .arg(repo.name.as_str())
-            .current_dir(
-                dirs::home_dir()
-                    .context("get home_dir failed")?
-                    .join(".test_moecly_conf"),
-            )
+            .current_dir(Common::get_cfg_path()?)
             .output()?;
         if !output.status.success() {
             bail!(
