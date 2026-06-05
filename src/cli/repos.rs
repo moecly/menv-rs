@@ -1,6 +1,6 @@
 use std::{process::Command, sync::Arc};
 
-use color_eyre::eyre::{Result, bail};
+use color_eyre::eyre::{ContextCompat, Result, bail};
 use parking_lot::Mutex;
 use tokio::task::spawn_blocking;
 
@@ -21,13 +21,15 @@ pub enum ReposCommands {
 pub struct Repos;
 
 impl Repos {
-    pub fn handle_cmd(cfg: &CliConfig, cmd: ReposCommands) -> Result<()> {
+    pub async fn handle_cmd(cfg: &CliConfig, cmd: ReposCommands) -> Result<()> {
         match cmd {
             ReposCommands::Init => {
-                Self::init_all(cfg)?;
+                Self::init_all(cfg).await?;
             }
             ReposCommands::List => {}
-            ReposCommands::Pull => {}
+            ReposCommands::Pull => {
+                Self::pull_all(cfg).await?;
+            }
             ReposCommands::Link => {}
         }
         Ok(())
@@ -38,11 +40,12 @@ impl Repos {
         Ok(repos_path.join(repo_name).exists())
     }
 
-    fn init_all(cfg: &CliConfig) -> Result<bool> {
+    async fn init_all(cfg: &CliConfig) -> Result<bool> {
         let repos = cfg.get_repos_config();
         let success = Arc::new(Mutex::new(0));
         let failed = Arc::new(Mutex::new(0));
         let total = repos.len();
+        let mut handles = Vec::new();
         Common::print_emoji_title("📦", "Repository Initialization");
         repos.iter().for_each(|r| {
             let tmpr = RepoConfig {
@@ -59,7 +62,7 @@ impl Repos {
                 *success.lock() += 1;
                 return;
             }
-            spawn_blocking(move || {
+            handles.push(spawn_blocking(move || {
                 let ret = Self::init(&tmpr);
                 match ret {
                     Ok(_) => {
@@ -71,8 +74,13 @@ impl Repos {
                         *failed.lock() += 1;
                     }
                 }
-            });
+            }));
         });
+
+        for handle in handles {
+            handle.await?;
+        }
+
         Common::print_summary(*success.lock(), *failed.lock(), total);
         Ok(true)
     }
@@ -87,6 +95,65 @@ impl Repos {
         if !output.status.success() {
             bail!(
                 "failed to git clone: {}, {}",
+                repo.name,
+                str::from_utf8(&output.stderr)?
+            );
+        }
+
+        Ok(str::from_utf8(&output.stderr)?.to_string())
+    }
+
+    async fn pull_all(cfg: &CliConfig) -> Result<()> {
+        let repos = cfg.get_repos_config();
+        let success = Arc::new(Mutex::new(0));
+        let failed = Arc::new(Mutex::new(0));
+        let total = repos.len();
+        let mut handles = Vec::new();
+        Common::print_emoji_title("⬇️", "Repository Pull");
+        repos.iter().for_each(|r| {
+            let tmpr = RepoConfig {
+                name: r.name.clone(),
+                git_url: r.git_url.clone(),
+            };
+            let success = Arc::clone(&success);
+            let failed = Arc::clone(&failed);
+            handles.push(spawn_blocking(move || match Self::pull(&tmpr) {
+                Ok(_) => {
+                    Common::print_progress_done(&tmpr.name);
+                    *success.lock() += 1;
+                }
+                Err(e) => {
+                    Common::print_progress_failed(&tmpr.name, &e.to_string());
+                    *failed.lock() += 1;
+                }
+            }));
+        });
+
+        for handle in handles {
+            handle.await?;
+        }
+
+        Common::print_summary(*success.lock(), *failed.lock(), total);
+        Ok(())
+    }
+
+    fn pull(repo: &RepoConfig) -> Result<String> {
+        let work_dir = Common::get_cfg_path()?.join(&repo.name);
+        if !work_dir.exists() {
+            bail!(
+                "repo: {} not exists",
+                work_dir.to_str().context("pathbuf to str failed")?
+            );
+        }
+
+        let output = Command::new("git")
+            .arg("pull")
+            .current_dir(work_dir)
+            .output()?;
+
+        if !output.status.success() {
+            bail!(
+                "failed to git pull: {}, {}",
                 repo.name,
                 str::from_utf8(&output.stderr)?
             );

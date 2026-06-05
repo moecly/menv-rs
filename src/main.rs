@@ -13,6 +13,6 @@ async fn main() -> Result<()> {
         .with_file(true)
         .with_line_number(true)
         .init();
-    cli_main().context("cli main failed")?;
+    cli_main().await.context("cli main failed")?;
     Ok(())
 }

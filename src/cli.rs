@@ -29,14 +29,14 @@ enum Commands {
     },
 }
 
-pub fn cli_main() -> Result<()> {
+pub async fn cli_main() -> Result<()> {
     let cli = Cli::parse();
     let cli_cfg = CliConfig::load()?;
     match cli.commands {
         Commands::Status => {
             status::Status::handle_cmd(&cli_cfg)?;
         }
-        Commands::Repos { repos_cmd } => repos::Repos::handle_cmd(&cli_cfg, repos_cmd)?,
+        Commands::Repos { repos_cmd } => repos::Repos::handle_cmd(&cli_cfg, repos_cmd).await?,
         Commands::Tools { tools_cmd } => {
             tools::Tools::handle_cmd(&cli_cfg, tools_cmd)?;
         }
