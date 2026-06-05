@@ -26,7 +26,9 @@ impl Repos {
             ReposCommands::Init => {
                 Self::init_all(cfg).await?;
             }
-            ReposCommands::List => {}
+            ReposCommands::List => {
+                Self::list_all(cfg)?;
+            }
             ReposCommands::Pull => {
                 Self::pull_all(cfg).await?;
             }
@@ -219,6 +221,26 @@ impl Repos {
                 str::from_utf8(&output.stderr)?
             );
         }
+        Ok(())
+    }
+
+    fn list_all(cfg: &CliConfig) -> Result<()> {
+        let repos = cfg.get_repos_config();
+        let total = repos.len();
+        let mut cloned_count = 0;
+
+        Common::print_emoji_title("📋", "Repository List");
+        for (idx, r) in repos.iter().enumerate() {
+            if Self::repo_is_exist(&r.name)? {
+                cloned_count += 1;
+                Common::print_success(&format!("{}. {} ({})", idx + 1, r.name, r.git_url));
+            } else {
+                Common::print_error(&format!("{}. {} ({})", idx + 1, r.name, r.git_url));
+            }
+        }
+
+        Common::print_summary(cloned_count, total - cloned_count, total);
+
         Ok(())
     }
 }
