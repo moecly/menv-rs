@@ -1,9 +1,13 @@
-use std::process::Command;
+use std::{process::Command, sync::Arc};
 
 use color_eyre::eyre::{ContextCompat, Result, bail};
+use parking_lot::Mutex;
 use tokio::task::spawn_blocking;
 
-use crate::cli::cli_config::{CliConfig, RepoConfig};
+use crate::cli::{
+    cli_config::{CliConfig, RepoConfig},
+    common::Common,
+};
 
 #[derive(Debug, clap::Subcommand)]
 pub enum ReposCommands {
@@ -38,24 +42,40 @@ impl Repos {
 
     fn init_all(cfg: &CliConfig) -> Result<bool> {
         let repos = cfg.get_repos_config();
+        let success = Arc::new(Mutex::new(0));
+        let failed = Arc::new(Mutex::new(0));
+        let total = repos.len();
+        Common::print_emoji_title("📦", "Repository Initialization");
         repos.iter().for_each(|r| {
             let tmpr = RepoConfig {
                 name: r.name.clone(),
                 git_url: r.git_url.clone(),
             };
+
+            let success = Arc::clone(&success);
+            let failed = Arc::clone(&failed);
+            if let Ok(v) = Repos::repo_is_exist(&tmpr.name)
+                && v
+            {
+                Common::print_progress_done(&tmpr.name);
+                *success.lock() += 1;
+                return;
+            }
             spawn_blocking(move || {
                 let ret = Self::init(&tmpr);
                 match ret {
-                    Ok(s) => {
-                        println!("git clone {} {}, {}", tmpr.git_url, tmpr.name, s);
+                    Ok(_) => {
+                        Common::print_progress_done(&tmpr.name);
+                        *success.lock() += 1;
                     }
                     Err(e) => {
-                        println!("git clone {} {}, {}", tmpr.git_url, tmpr.name, e);
+                        Common::print_progress_failed(&tmpr.name, &e.to_string());
+                        *failed.lock() += 1;
                     }
                 }
             });
         });
-
+        Common::print_summary(*success.lock(), *failed.lock(), total);
         Ok(true)
     }
 

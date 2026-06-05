@@ -4,6 +4,7 @@ use color_eyre::eyre::{Ok, Result};
 use crate::cli::{cli_config::CliConfig, repos::ReposCommands, tools::ToolsCommands};
 
 mod cli_config;
+mod common;
 mod repos;
 mod status;
 mod tools;
