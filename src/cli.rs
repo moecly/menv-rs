@@ -1,11 +1,14 @@
 use clap::Parser;
 use color_eyre::eyre::{Ok, Result};
 
-use crate::cli::{cli_config::CliConfig, repos::ReposCommands, tools::ToolsCommands};
+use crate::cli::{
+    cli_config::CliConfig, repos::ReposCommands, scripts::ScriptsCommand, tools::ToolsCommands,
+};
 
 mod cli_config;
 mod common;
 mod repos;
+mod scripts;
 mod status;
 mod tools;
 
@@ -27,6 +30,10 @@ enum Commands {
         #[command(subcommand)]
         tools_cmd: ToolsCommands,
     },
+    Scripts {
+        #[command(subcommand)]
+        scripts_cmd: ScriptsCommand,
+    },
 }
 
 pub async fn cli_main() -> Result<()> {
@@ -39,6 +46,9 @@ pub async fn cli_main() -> Result<()> {
         Commands::Repos { repos_cmd } => repos::Repos::handle_cmd(&cli_cfg, repos_cmd).await?,
         Commands::Tools { tools_cmd } => {
             tools::Tools::handle_cmd(&cli_cfg, tools_cmd)?;
+        }
+        Commands::Scripts { scripts_cmd } => {
+            scripts::Scripts::handle_cmd(&cli_cfg, scripts_cmd)?;
         }
     }
     Ok(())
