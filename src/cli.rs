@@ -11,6 +11,7 @@ mod repos;
 mod scripts;
 mod status;
 mod tools;
+mod upgrade;
 
 #[derive(Debug, clap::Parser)]
 #[command(name = "menv", about = "a dotfiles manager tool")]
@@ -34,6 +35,7 @@ enum Commands {
         #[command(subcommand)]
         scripts_cmd: ScriptsCommand,
     },
+    Upgrade,
 }
 
 pub async fn cli_main() -> Result<()> {
@@ -49,6 +51,9 @@ pub async fn cli_main() -> Result<()> {
         }
         Commands::Scripts { scripts_cmd } => {
             scripts::Scripts::handle_cmd(&cli_cfg, scripts_cmd)?;
+        }
+        Commands::Upgrade => {
+            upgrade::Upgrade::handle_cmd()?;
         }
     }
     Ok(())
