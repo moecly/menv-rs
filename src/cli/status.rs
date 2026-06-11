@@ -1,6 +1,6 @@
 use color_eyre::eyre::Result;
 
-use crate::cli::{cli_config::CliConfig, repos::Repos, tools::Tools};
+use crate::cli::{cli_config::CliConfig, common::Common, repos::Repos, tools::Tools};
 
 #[derive(Debug)]
 pub struct Status;
@@ -39,8 +39,9 @@ impl Status {
             }
         }
 
-        println!("✔ Repos: {}/{} cloned", repos_install, repos_total);
-        println!("✔ Tools: {}/{} cloned", tools_install, tools_total);
+        Common::print_emoji_title("📊", "Status Overview");
+        Common::print_success(&format!("Tools: {}/{}", tools_install, tools_total));
+        Common::print_success(&format!("Repositories: {}/{}", repos_install, repos_total));
 
         Ok(())
     }
