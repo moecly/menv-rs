@@ -90,21 +90,13 @@ impl Repos {
     }
 
     fn init(repo: &RepoConfig) -> Result<String> {
-        let output = Command::new("git")
-            .arg("clone")
-            .arg(repo.git_url.as_str())
-            .arg(repo.name.as_str())
-            .current_dir(Common::get_cfg_path()?)
-            .output()?;
-        if !output.status.success() {
-            bail!(
-                "failed to git clone: {}, {}",
-                repo.name,
-                str::from_utf8(&output.stderr)?
-            );
-        }
-
-        Ok(str::from_utf8(&output.stderr)?.to_string())
+        Common::process_command(
+            Command::new("git")
+                .arg("clone")
+                .arg(repo.git_url.as_str())
+                .arg(repo.name.as_str())
+                .current_dir(Common::get_cfg_path()?),
+        )
     }
 
     async fn pull_all(cfg: &CliConfig) -> Result<()> {
@@ -150,20 +142,7 @@ impl Repos {
             );
         }
 
-        let output = Command::new("git")
-            .arg("pull")
-            .current_dir(work_dir)
-            .output()?;
-
-        if !output.status.success() {
-            bail!(
-                "failed to git pull: {}, {}",
-                repo.name,
-                str::from_utf8(&output.stderr)?
-            );
-        }
-
-        Ok(str::from_utf8(&output.stderr)?.to_string())
+        Common::process_command(Command::new("git").arg("pull").current_dir(work_dir))
     }
 
     async fn link_all(cfg: &CliConfig) -> Result<()> {
@@ -209,18 +188,7 @@ impl Repos {
             );
         }
 
-        let output = Command::new("sh")
-            .arg("link.sh")
-            .current_dir(work_dir)
-            .output()?;
-
-        if !output.status.success() {
-            bail!(
-                "failed to git pull: {}, {}",
-                repo.name,
-                str::from_utf8(&output.stderr)?
-            );
-        }
+        Common::process_command(Command::new("sh").arg("link.sh").current_dir(work_dir))?;
         Ok(())
     }
 

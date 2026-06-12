@@ -56,25 +56,24 @@ pub fn run() -> Result<()> {
     }
     Common::print_progress(&format!("Setting default boot entry: {}", selected_entry));
 
-    let output = std::process::Command::new("sudo")
-        .arg("bootctl")
-        .arg("set-default")
-        .arg(&entries[selected_entry])
-        .output()?;
-
-    if !output.status.success() {
-        let err_msg = String::from_utf8_lossy(&output.stderr);
-        Common::print_progress_failed("Failed", &err_msg);
-        Common::print_error("Failed to set default boot entry");
-        bail!("bootctl set-default failed: {}", err_msg);
-    } else {
-        Common::print_progress_done("Success");
-        println!();
-        Common::print_success(&format!(
-            "Default boot entry set to: {}",
-            &entries[selected_entry]
-        ));
+    match Common::process_command(
+        std::process::Command::new("sudo")
+            .arg("bootctl")
+            .arg("set-default")
+            .arg(&entries[selected_entry]),
+    ) {
+        Ok(_) => {
+            Common::print_progress_done("Success");
+            Common::print_success(&format!(
+                "Default boot entry set to: {}",
+                &entries[selected_entry]
+            ));
+        }
+        Err(e) => {
+            Common::print_progress_failed("Failed", &e.to_string());
+            Common::print_error("Failed to set default boot entry");
+            bail!("bootctl set-default failed: {}", e);
+        }
     }
-
     Ok(())
 }

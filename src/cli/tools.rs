@@ -1,7 +1,7 @@
 use crate::cli::{cli_config::CliConfig, common::Common};
 use std::process::Command;
 
-use color_eyre::eyre::{ContextCompat, Ok, Result, bail};
+use color_eyre::eyre::{ContextCompat, Result};
 
 #[derive(Debug)]
 #[allow(dead_code)]
@@ -89,24 +89,25 @@ impl Tools {
                 }
                 pacman_tools_str.push_str(tool);
             });
-            let output = Command::new("sudo")
-                .arg("pacman")
-                .arg("-S")
-                .arg("--needed")
-                .arg("--noconfirm")
-                .arg(pacman_tools_str)
-                .output()?;
-            if output.status.success() {
-                Common::print_success(&format!(
-                    "Installed {} packages",
-                    pacman_need_install_tools.len()
-                ));
-                success += pacman_need_install_tools.len();
-            } else {
-                let error_msg = str::from_utf8(&output.stderr)?;
-                Common::print_error(&format!("Installation failed: {}", error_msg));
-                failed += pacman_need_install_tools.len();
-                // bail!("failed to install: {}", error_msg);
+            match Common::process_command(
+                Command::new("sudo")
+                    .arg("pacman")
+                    .arg("-S")
+                    .arg("--needed")
+                    .arg("--noconfirm")
+                    .arg(pacman_tools_str),
+            ) {
+                Ok(_) => {
+                    Common::print_success(&format!(
+                        "Installed {} packages",
+                        pacman_need_install_tools.len()
+                    ));
+                    success += pacman_need_install_tools.len();
+                }
+                Err(e) => {
+                    Common::print_error(&format!("Installation failed: {}", e));
+                    failed += pacman_need_install_tools.len();
+                }
             }
         }
 
@@ -118,25 +119,25 @@ impl Tools {
                 }
                 paru_tools_str.push_str(tool);
             });
-            let output = Command::new("sudo")
-                .arg("paru")
-                .arg("-S")
-                .arg("--needed")
-                .arg("--noconfirm")
-                .arg(paru_tools_str)
-                .output()?;
 
-            if output.status.success() {
-                Common::print_success(&format!(
-                    "Installed {} packages",
-                    paru_need_install_tools.len()
-                ));
-                success += paru_need_install_tools.len();
-            } else {
-                let error_msg = str::from_utf8(&output.stderr)?;
-                Common::print_error(&format!("Installation failed: {}", error_msg));
-                failed += paru_need_install_tools.len();
-                // bail!("failed to install: {}", error_msg);
+            match Common::process_command(
+                Command::new("sudo")
+                    .arg("paru")
+                    .arg("-S")
+                    .arg("--needed")
+                    .arg("--noconfirm")
+                    .arg(paru_tools_str),
+            ) {
+                Ok(_) => {
+                    Common::print_success(&format!(
+                        "Installed {} packages",
+                        paru_need_install_tools.len()
+                    ));
+                }
+                Err(e) => {
+                    Common::print_error(&format!("Installation failed: {}", e));
+                    failed += paru_need_install_tools.len();
+                }
             }
         }
 
@@ -185,23 +186,19 @@ impl Tools {
     }
 
     pub fn cmd_v(cmd: &str) -> Result<bool> {
-        let output = Command::new("sh")
-            .arg("-c")
-            .arg(format!("command -v {}", cmd))
-            .output()?;
-        Ok(output.status.success())
+        match Common::process_command(
+            Command::new("sh")
+                .arg("-c")
+                .arg(format!("command -v {}", cmd)),
+        ) {
+            Ok(_) => Ok(true),
+            Err(_) => Ok(false),
+        }
     }
 
     pub fn get_pacman_qs() -> Result<Vec<PacmanQsInfo>> {
         let mut ret = Vec::new();
-        let output = Command::new("pacman").arg("-Qs").output()?;
-        if !output.status.success() {
-            bail!(
-                "command: pacman -Qs failed, {}",
-                str::from_utf8(&output.stderr)?
-            );
-        }
-        let output_stdout = str::from_utf8(&output.stdout)?;
+        let output_stdout = Common::process_command(Command::new("pacman").arg("-Qs"))?;
         for line in output_stdout.lines() {
             if !line.starts_with("local/") {
                 continue;

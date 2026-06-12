@@ -1,6 +1,6 @@
-use std::{io::Write, path::PathBuf};
+use std::{io::Write, path::PathBuf, process::Command};
 
-use color_eyre::eyre::{ContextCompat, Result};
+use color_eyre::eyre::{ContextCompat, Result, bail};
 use colored::Colorize;
 
 #[derive(Debug)]
@@ -78,5 +78,13 @@ impl Common {
             .context("get home_dir failed")?
             .join(".local")
             .join("bin"))
+    }
+
+    pub fn process_command(cmd: &mut Command) -> Result<String> {
+        let output = cmd.output()?;
+        if !output.status.success() {
+            bail!("cmd failed: {}", str::from_utf8(&output.stdout)?)
+        }
+        Ok(str::from_utf8(&output.stdout)?.to_string())
     }
 }
