@@ -150,6 +150,8 @@ impl Tools {
         let mut success = 0;
         let mut failed = 0;
         let total = tools.len();
+
+        Common::print_emoji_title("📋", "Tools List");
         for (idx, tool) in tools.iter().enumerate() {
             let is_installed = Self::cmd_v(&tool.command)?;
             let in_pacman = if !is_installed {
@@ -182,7 +184,7 @@ impl Tools {
         Ok(())
     }
 
-    pub fn cmd_v(cmd: &String) -> Result<bool> {
+    pub fn cmd_v(cmd: &str) -> Result<bool> {
         let output = Command::new("sh")
             .arg("-c")
             .arg(format!("command -v {}", cmd))

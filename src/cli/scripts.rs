@@ -25,7 +25,16 @@ pub enum ScriptsCommand {
 pub struct Scripts;
 
 impl Scripts {
-    pub fn handle_cmd(_cfg: &CliConfig, _cmd: ScriptsCommand) -> Result<()> {
+    pub fn handle_cmd(_cfg: &CliConfig, cmd: ScriptsCommand) -> Result<()> {
+        match cmd {
+            ScriptsCommand::BootDefault => boot_default::run()?,
+            ScriptsCommand::Hibernate => hibernate::run()?,
+            ScriptsCommand::Locale => locale::run()?,
+            ScriptsCommand::Paru => paru::run()?,
+            ScriptsCommand::Service => service::run()?,
+            ScriptsCommand::Swapfile => swapfile::run()?,
+            ScriptsCommand::Trim => trim::run()?,
+        }
         Ok(())
     }
 }

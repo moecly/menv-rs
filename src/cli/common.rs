@@ -26,31 +26,35 @@ impl Common {
         println!();
     }
 
+    pub fn print_msg(message: &str) {
+        println!("{}", message.blue());
+    }
+
     pub fn print_success(message: &str) {
-        println!("  ✅ {}", message.green());
+        println!("✅ {}", message.green());
     }
 
     pub fn print_error(message: &str) {
-        println!("  ❌ {}", message.red());
+        println!("❌ {}", message.red());
     }
 
     pub fn print_progress(name: &str) {
-        print!("  {} {} ... ", "⏳".yellow(), name);
+        print!("{} {} ... ", "⏳".yellow(), name);
         std::io::stdout().flush().unwrap();
     }
 
     pub fn print_progress_done(name: &str) {
-        println!("\r  ✅ {}                         ", name.green());
+        println!("\r✅ {}                         ", name.green());
     }
 
     pub fn print_progress_failed(name: &str, error: &str) {
-        println!("\r  ❌ {} - {}", name.red(), error.red());
+        println!("\r❌ {} - {}", name.red(), error.red());
     }
 
     pub fn print_summary(success: usize, failed: usize, total: usize) {
         println!("\n{}", "─".repeat(50).dimmed());
         println!(
-            "  {} {}: {}/{}",
+            "{} {}: {}/{}",
             "✨".bright_yellow(),
             "Complete".green().bold(),
             success,
