@@ -15,7 +15,3 @@ targets = ["x86_64-apple-darwin", "x86_64-unknown-linux-gnu", "x86_64-pc-windows
 install-path = "~/.local/bin"
 # Whether to install an updater program
 install-updater = true
-include = [
-    "config/repos.toml",
-    "config/tools.toml",
-]

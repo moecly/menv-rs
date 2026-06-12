@@ -1,5 +1,5 @@
-use color_eyre::eyre::{Context, Ok, Result};
-use config::{Config, File};
+use color_eyre::eyre::{Ok, Result};
+use config::Config;
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
@@ -29,15 +29,17 @@ pub struct CliConfig {
     repos_config: Vec<RepoConfig>,
 }
 
+const REPOS_TOML: &str = include_str!("../../config/repos.toml");
+const TOOLS_TOML: &str = include_str!("../../config/tools.toml");
+
 impl CliConfig {
     pub fn load() -> Result<Self> {
         let cfg = Config::builder()
-            .add_source(File::with_name("config/repos"))
-            .add_source(File::with_name("config/tools"))
-            .build()
-            .context("Load config failed")?;
-        let cli_cfg: Self = cfg.try_deserialize().context("config deserialize failed")?;
-        Ok(cli_cfg)
+            .add_source(config::File::from_str(REPOS_TOML, config::FileFormat::Toml))
+            .add_source(config::File::from_str(TOOLS_TOML, config::FileFormat::Toml))
+            .build()?;
+
+        Ok(cfg.try_deserialize()?)
     }
 
     pub fn get_tools_config(&self) -> &Vec<ToolConfig> {
