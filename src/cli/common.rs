@@ -68,4 +68,11 @@ impl Common {
             .context("get home_dir failed")?
             .join(".test_moecly_conf"))
     }
+
+    pub fn get_bin_path() -> Result<PathBuf> {
+        Ok(dirs::home_dir()
+            .context("get home_dir failed")?
+            .join(".local")
+            .join("bin"))
+    }
 }
