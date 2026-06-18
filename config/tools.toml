@@ -1024,3 +1024,11 @@ package_source = "paru"
 category = "other"
 desc = "AI CLI 多平台切换助手"
 command = "cc-switch"
+
+[[tools]]
+tool_name = "dua-cli"
+package_name = "dua-cli"
+package_source = "pacman"
+category = "other"
+desc = "AI CLI 多平台切换助手"
+command = "dua"

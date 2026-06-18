@@ -82,21 +82,16 @@ impl Tools {
         }
 
         if !pacman_need_install_tools.is_empty() {
-            let mut pacman_tools_str = String::new();
+            let mut cmd = Command::new("sudo");
+            cmd.arg("pacman")
+                .arg("-S")
+                .arg("--needed")
+                .arg("--noconfirm");
             pacman_need_install_tools.iter().for_each(|tool| {
-                if !pacman_tools_str.is_empty() {
-                    pacman_tools_str.push(' ');
-                }
-                pacman_tools_str.push_str(tool);
+                cmd.arg(tool);
             });
-            match Common::process_command(
-                Command::new("sudo")
-                    .arg("pacman")
-                    .arg("-S")
-                    .arg("--needed")
-                    .arg("--noconfirm")
-                    .arg(pacman_tools_str),
-            ) {
+
+            match Common::process_command(&mut cmd) {
                 Ok(_) => {
                     Common::print_success(&format!(
                         "Installed {} packages",
