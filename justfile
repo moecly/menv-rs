@@ -1,7 +1,7 @@
 all: fmt run
 
 run *args:
-    RUST_LOG=debug cargo run {{args}}
+    RUST_LOG=debug cargo run -- {{args}}
 
 build:
     cargo build

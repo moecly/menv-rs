@@ -1,0 +1,186 @@
+{
+  "version": "1",
+  "generatedAt": "2026-06-18T01:01:09.596Z",
+  "entries": {
+    "/mnt/local0/develop/rust/menv-rs/src/main.rs": {
+      "mtime": 1781743149021.8433,
+      "size": 432,
+      "symbols": {
+        "purpose": null,
+        "exports": [],
+        "language": "rust"
+      }
+    },
+    "/mnt/local0/develop/rust/menv-rs/src/cli.rs": {
+      "mtime": 1781743225788.2532,
+      "size": 1410,
+      "symbols": {
+        "purpose": null,
+        "exports": [
+          "cli_main"
+        ],
+        "language": "rust"
+      }
+    },
+    "/mnt/local0/develop/rust/menv-rs/src/cli/update.rs": {
+      "mtime": 1781231129980.7458,
+      "size": 1261,
+      "symbols": {
+        "purpose": null,
+        "exports": [
+          "Update"
+        ],
+        "language": "rust"
+      }
+    },
+    "/mnt/local0/develop/rust/menv-rs/src/cli/tools.rs": {
+      "mtime": 1781744443408.7124,
+      "size": 6762,
+      "symbols": {
+        "purpose": null,
+        "exports": [
+          "PacmanQsInfo",
+          "ToolsCommands",
+          "Tools"
+        ],
+        "language": "rust"
+      }
+    },
+    "/mnt/local0/develop/rust/menv-rs/src/cli/status.rs": {
+      "mtime": 1781166164064.5652,
+      "size": 1369,
+      "symbols": {
+        "purpose": null,
+        "exports": [
+          "Status"
+        ],
+        "language": "rust"
+      }
+    },
+    "/mnt/local0/develop/rust/menv-rs/src/cli/scripts.rs": {
+      "mtime": 1781231511811.5864,
+      "size": 895,
+      "symbols": {
+        "purpose": null,
+        "exports": [
+          "ScriptsCommand",
+          "Scripts"
+        ],
+        "language": "rust"
+      }
+    },
+    "/mnt/local0/develop/rust/menv-rs/src/cli/repos.rs": {
+      "mtime": 1781252086596.8838,
+      "size": 6701,
+      "symbols": {
+        "purpose": null,
+        "exports": [
+          "ReposCommands",
+          "Repos"
+        ],
+        "language": "rust"
+      }
+    },
+    "/mnt/local0/develop/rust/menv-rs/src/cli/common.rs": {
+      "mtime": 1781251794954.1401,
+      "size": 2544,
+      "symbols": {
+        "purpose": null,
+        "exports": [
+          "Common"
+        ],
+        "language": "rust"
+      }
+    },
+    "/mnt/local0/develop/rust/menv-rs/src/cli/cli_config.rs": {
+      "mtime": 1781229696918.944,
+      "size": 1295,
+      "symbols": {
+        "purpose": null,
+        "exports": [
+          "RepoConfig",
+          "ToolConfig",
+          "CliConfig"
+        ],
+        "language": "rust"
+      }
+    },
+    "/mnt/local0/develop/rust/menv-rs/src/cli/scripts/trim.rs": {
+      "mtime": 1781231691631.2944,
+      "size": 73,
+      "symbols": {
+        "purpose": null,
+        "exports": [
+          "run"
+        ],
+        "language": "rust"
+      }
+    },
+    "/mnt/local0/develop/rust/menv-rs/src/cli/scripts/swapfile.rs": {
+      "mtime": 1781231689730.0798,
+      "size": 73,
+      "symbols": {
+        "purpose": null,
+        "exports": [
+          "run"
+        ],
+        "language": "rust"
+      }
+    },
+    "/mnt/local0/develop/rust/menv-rs/src/cli/scripts/service.rs": {
+      "mtime": 1781231687513.8271,
+      "size": 73,
+      "symbols": {
+        "purpose": null,
+        "exports": [
+          "run"
+        ],
+        "language": "rust"
+      }
+    },
+    "/mnt/local0/develop/rust/menv-rs/src/cli/scripts/paru.rs": {
+      "mtime": 1781231686058.66,
+      "size": 73,
+      "symbols": {
+        "purpose": null,
+        "exports": [
+          "run"
+        ],
+        "language": "rust"
+      }
+    },
+    "/mnt/local0/develop/rust/menv-rs/src/cli/scripts/locale.rs": {
+      "mtime": 1781231684497.4792,
+      "size": 73,
+      "symbols": {
+        "purpose": null,
+        "exports": [
+          "run"
+        ],
+        "language": "rust"
+      }
+    },
+    "/mnt/local0/develop/rust/menv-rs/src/cli/scripts/hibernate.rs": {
+      "mtime": 1781257202055.096,
+      "size": 1981,
+      "symbols": {
+        "purpose": null,
+        "exports": [
+          "run"
+        ],
+        "language": "rust"
+      }
+    },
+    "/mnt/local0/develop/rust/menv-rs/src/cli/scripts/boot_default.rs": {
+      "mtime": 1781254493141.123,
+      "size": 2623,
+      "symbols": {
+        "purpose": null,
+        "exports": [
+          "run"
+        ],
+        "language": "rust"
+      }
+    }
+  }
+}
